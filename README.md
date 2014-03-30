@@ -6,8 +6,8 @@ XMLHttpRequest Proxy for Node.js
 
 # Document
 
-https://github.com/uupaa/NodeProxy.js/wiki/NodeProxy
-https://github.com/uupaa/Proxy.js/wiki/Proxy
+- https://github.com/uupaa/NodeProxy.js/wiki/NodeProxy
+- https://github.com/uupaa/Proxy.js/wiki/Proxy
 
 # How to use
 

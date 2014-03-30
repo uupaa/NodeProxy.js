@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.nodeproxy.js",
-  "version":        "0.0.2",
+  "version":        "0.0.3",
   "description":    "XMLHttpRequest Proxy for Node.js",
   "url":            "https://github.com/uupaa/NodeProxy.js",
   "keywords":       ["XHR", "network", "util", "uupaa", "WebModule"],
