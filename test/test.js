@@ -79,40 +79,6 @@ function testProxy(next) {
 
 
 
-/*
-function testNodeProxy(next) {
-    var href = "./index.html";
-
-    var task = new Task(2, function(err, buffer) {
-            if ( buffer.proxy === buffer.proxy_get ) {
-                console.log("testProxy ok");
-                next && next.pass();
-            } else {
-                console.error("testProxy ng");
-                next && next.miss();
-            }
-        });
-
-debugger;
-    // ----------------------------------------------
-    var proxy = new NodeProxy();
-
-    proxy.on("load", function(event) {
-        task.set("proxy", this.responseText);
-        task.pass();
-    });
-    proxy.open("GET", href);
-    proxy.send();
-
-    // ----------------------------------------------
-    var proxy2 = new NodeProxy();
-
-    proxy2.get(href, function(error, responseText, xhr) {
-        task.set("proxy_get", responseText);
-        task.pass();
-    });
-}
- */
 function testNodeProxy(next) {
     var absolute = "http://example.com/";
     var relative = "./test/index.html";
