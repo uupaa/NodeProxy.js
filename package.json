@@ -1,0 +1,41 @@
+{
+  "name":           "uupaa.nodeproxy.js",
+  "version":        "0.0.1",
+  "description":    "XMLHttpRequest Proxy for Node.js",
+  "url":            "https://github.com/uupaa/NodeProxy.js",
+  "keywords":       ["XHR", "network", "util", "uupaa", "WebModule"],
+  "repository": {
+    "type":         "git",
+    "url":          "https://github.com/uupaa/NodeProxy.js.git"
+  },
+  "scripts": {
+    "watch":        "node node_modules/uupaa.watch.js --verbose --action build",
+    "build":        "node node_modules/uupaa.minify.js --verbose --strict --keep --pretty",
+    "build-simple": "node node_modules/uupaa.minify.js --verbose --strict --keep --pretty --nowrap --simple",
+    "build-release":"node node_modules/uupaa.minify.js --verbose --strict --module",
+    "test":         "NODE_ENV=production NODE_PATH=lib node --harmony test/index.node.js",
+    "lint":         "node node_modules/uupaa.plato.js; open lint/plato/index.html"
+  },
+  "x-build": {
+    "inputs":       ["lib/NodeProxy.js"],
+    "output":       "lib/NodeProxy.min.js"
+  },
+  "dependencies": {
+    "uupaa.bytearray.js":   "",
+    "uupaa.uri.js":     ""
+  },
+  "devDependencies": {
+    "uupaa.valid.js":   "",
+    "uupaa.help.js":    "",
+    "uupaa.task.js":    "",
+    "uupaa.test.js":    "",
+    "uupaa.watch.js":   "",
+    "uupaa.plato.js":   "",
+    "uupaa.minify.js":  ""
+  },
+  "lib":            "./lib/",
+  "main":           "./index.js",
+  "author":         "uupaa <uupaa.js@gmail.com>",
+  "license":        "MIT",
+  "contributors":   []
+}
