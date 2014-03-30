@@ -8,56 +8,56 @@ __report = {
         "link": "files/lib_NodeProxy_js/index.html"
       },
       "jshint": {
-        "messages": 14
+        "messages": 13
       },
       "complexity": {
         "aggregate": {
           "line": 4,
           "complexity": {
             "sloc": {
-              "physical": 427,
-              "logical": 273
+              "physical": 454,
+              "logical": 269
             },
-            "cyclomatic": 43,
+            "cyclomatic": 42,
             "halstead": {
               "operators": {
                 "distinct": 28,
-                "total": 636,
+                "total": 620,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
               "operands": {
-                "distinct": 218,
-                "total": 827,
+                "distinct": 224,
+                "total": 825,
                 "identifiers": [
                   "__stripped__"
                 ]
               },
-              "length": 1463,
-              "vocabulary": 246,
-              "difficulty": 53.11009174311927,
-              "volume": 11619.898721311309,
-              "effort": 617133.8871345979,
-              "bugs": 3.8732995737704363,
-              "time": 34285.2159519221
+              "length": 1445,
+              "vocabulary": 252,
+              "difficulty": 51.5625,
+              "volume": 11527.16948945738,
+              "effort": 594369.6768001461,
+              "bugs": 3.8423898298191266,
+              "time": 33020.537600008116
             },
-            "params": 38
+            "params": 39
           }
         },
         "module": "lib/NodeProxy.js",
-        "maintainability": 66.6172516737272
+        "maintainability": 67.10601033427824
       }
     }
   ],
   "summary": {
     "total": {
-      "sloc": 427,
-      "maintainability": 66.6172516737272
+      "sloc": 454,
+      "maintainability": 67.10601033427824
     },
     "average": {
-      "sloc": 427,
-      "maintainability": "66.62"
+      "sloc": 454,
+      "maintainability": "67.11"
     }
   }
 }
