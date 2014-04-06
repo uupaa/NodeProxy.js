@@ -9,6 +9,11 @@ XMLHttpRequest Proxy for Node.js
 - https://github.com/uupaa/NodeProxy.js/wiki/NodeProxy
 - https://github.com/uupaa/Proxy.js/wiki/Proxy
 
+and
+
+- https://github.com/uupaa/WebModule and [slide](http://uupaa.github.io/Slide/slide/WebModule/index.html)
+- https://github.com/uupaa/Help.js and [slide](http://uupaa.github.io/Slide/slide/Help.js/index.html)
+
 # How to use
 
 ```js
