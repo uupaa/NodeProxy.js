@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.nodeproxy.js",
-  "version":        "0.0.6",
+  "version":        "0.0.7",
   "description":    "XMLHttpRequest Proxy for Node.js",
   "url":            "https://github.com/uupaa/NodeProxy.js",
   "keywords":       ["XHR", "network", "util", "uupaa", "WebModule"],
@@ -13,7 +13,9 @@
     "build":        "node node_modules/uupaa.minify.js --verbose --strict --keep --pretty",
     "build-simple": "node node_modules/uupaa.minify.js --verbose --strict --keep --pretty --nowrap --simple",
     "build-release":"node node_modules/uupaa.minify.js --verbose --strict --module",
-    "test":         "NODE_ENV=production NODE_PATH=lib node --harmony test/index.node.js",
+    "test":         "npm run test-node; npm run test-browser",
+    "test-node":    "NODE_ENV=production NODE_PATH=lib node --harmony test/index.node.js",
+    "test-browser": "open test/index.html",
     "lint":         "node node_modules/uupaa.plato.js; open lint/plato/index.html"
   },
   "x-build": {
