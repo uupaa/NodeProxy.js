@@ -1,10 +1,9 @@
-require("uupaa.valid.js");
-require("uupaa.task.js");
-require("uupaa.test.js");
-require("uupaa.eventlistener.js");
-require("uupaa.uri.js");
-require("uupaa.bytearray.js");
+require("../node_modules/uupaa.valid.js/lib/Valid.js");
+require("../node_modules/uupaa.task.js/lib/Task.js");
+require("../node_modules/uupaa.test.js/lib/Test.js");
+require("../node_modules/uupaa.eventlistener.js/lib/EventListener.js");
+require("../node_modules/uupaa.bytearray.js/lib/ByteArray.js");
+require("../node_modules/uupaa.uri.js/lib/URI.js");
 require("../lib/NodeProxy.js");
 require("../release/NodeProxy.min.js");
 require("./test.js");
-
