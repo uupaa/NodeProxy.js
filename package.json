@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.nodeproxy.js",
-  "version":        "0.0.9",
+  "version":        "0.0.10",
   "description":    "XMLHttpRequest Proxy for Node.js",
   "url":            "https://github.com/uupaa/NodeProxy.js",
   "keywords":       ["XHR", "network", "util", "uupaa", "WebModule"],
@@ -13,8 +13,9 @@
     "build":        "node node_modules/uupaa.minify.js --verbose --strict --keep --pretty",
     "build-simple": "node node_modules/uupaa.minify.js --verbose --strict --keep --pretty --nowrap --simple",
     "build-release":"node node_modules/uupaa.minify.js --verbose --strict --module",
-    "test":         "npm run test-node; npm run test-browser",
-    "test-update":  "node node_modules/uupaa.test.js/bin/Test.js --browser --node",
+    "test":         "npm run test-node",
+    "test-page":    "node node_modules/uupaa.test.js/bin/TestPage.js --verbose",
+    "test-debug":   "NODE_ENV=production NODE_PATH=lib node --debug-brk --harmony test/index.node.js",
     "test-node":    "NODE_ENV=production NODE_PATH=lib node --harmony test/index.node.js",
     "test-browser": "open test/index.html",
     "lint":         "node node_modules/uupaa.plato.js; open lint/plato/index.html"
@@ -22,7 +23,11 @@
   "x-build": {
     "files":        ["lib/NodeProxy.js"],
     "output":       "release/NodeProxy.min.js",
-    "target":       ["Node"]
+    "target":       ["Node"],
+    "module": {
+      "develop":    ["uupaa.valid.js"],
+      "release":    ["uupaa.eventlistener.js", "uupaa.bytearray.js", "uupaa.uri.js"]
+    }
   },
   "dependencies": {
     "uupaa.eventlistener.js": "",
@@ -30,6 +35,7 @@
     "uupaa.uri.js":     ""
   },
   "devDependencies": {
+    "uupaa.nodemodule.js": "",
     "uupaa.console.js": "",
     "uupaa.valid.js":   "",
     "uupaa.help.js":    "",
