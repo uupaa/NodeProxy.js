@@ -1,4 +1,4 @@
-(function(global) {
+var ModuleTest = (function(global) {
 
 var _CONSOLE_COLOR = {
         RED:    "\u001b[31m",
@@ -11,8 +11,16 @@ var _inNode = "process" in global;
 var _inWorker = "WorkerLocation" in global;
 var _inBrowser = "self" in global;
 
-var test = new Test();
-
+var test = new Test({
+        disable:    false,
+        node:       true,
+        browser:    false,
+        worker:     false,
+        button:     true,
+        both:       true,
+        primary:    global["NodeProxy"],
+        secondary:  global["NodeProxy_"],
+    });
 
 if (_inBrowser) {
     test.add([ testProxy ]);
@@ -20,19 +28,8 @@ if (_inBrowser) {
     test.add([ testNodeProxy ]);
 }
 
-test.run(function(err, test) {
-        if (1) {
-            err || test.worker(function(err, test) {
-                if (!err && typeof Proxy_ !== "undefined") {
-                    var name = Test.swap(Proxy, Proxy_);
+return test.run().clone();
 
-                    new Test(test).run(function(err, test) {
-                        Test.undo(name);
-                    });
-                }
-            });
-        }
-    });
 
 function testProxy(next) {
     var href = _inWorker  ? this.href
