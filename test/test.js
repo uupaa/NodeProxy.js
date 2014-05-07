@@ -1,4 +1,4 @@
-var ModuleTest = (function(global) {
+var ModuleTestNodeProxy = (function(global) {
 
 var _CONSOLE_COLOR = {
         RED:    "\u001b[31m",
@@ -7,19 +7,17 @@ var _CONSOLE_COLOR = {
         CLEAR:  "\u001b[0m"
     };
 
-var _inNode = "process" in global;
-var _inWorker = "WorkerLocation" in global;
-var _inBrowser = "self" in global;
+var _inNode    = "process"        in global;
+var _inWorker  = "WorkerLocation" in global;
+var _inBrowser = "document"       in global;
 
-var test = new Test({
+var test = new Test("NodeProxy", {
         disable:    false,
-        node:       true,
         browser:    false,
         worker:     false,
+        node:       true,
         button:     true,
         both:       true,
-        primary:    global["NodeProxy"],
-        secondary:  global["NodeProxy_"],
     });
 
 if (_inBrowser) {
@@ -37,10 +35,8 @@ function testProxy(next) {
 
     var task = new Task(3, function(err, buffer) {
             if ( buffer.xhr === buffer.proxy && buffer.proxy === buffer.proxy_get ) {
-                console.log("testProxy ok");
                 next && next.pass();
             } else {
-                console.error("testProxy ng");
                 next && next.miss();
             }
         });
@@ -88,10 +84,8 @@ function testNodeProxy(next) {
                  buffer.localFile &&
                  buffer.fileScheme ) {
 
-                console.log("testProxy ok");
                 next && next.pass();
             } else {
-                console.error("testProxy ng");
                 next && next.miss();
             }
         });
