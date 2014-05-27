@@ -1,15 +1,15 @@
 var ModuleTestNodeProxy = (function(global) {
 
-var _CONSOLE_COLOR = {
+var CONSOLE_COLOR = {
         RED:    "\u001b[31m",
         YELLOW: "\u001b[33m",
         GREEN:  "\u001b[32m",
         CLEAR:  "\u001b[0m"
     };
 
-var _inNode    = "process"        in global;
-var _inWorker  = "WorkerLocation" in global;
-var _inBrowser = "document"       in global;
+var _runOnNode = "process" in global;
+var _runOnWorker = "WorkerLocation" in global;
+var _runOnBrowser = "document" in global;
 
 var test = new Test("NodeProxy", {
         disable:    false,
@@ -20,9 +20,12 @@ var test = new Test("NodeProxy", {
         both:       true,
     });
 
-if (_inBrowser) {
-    test.add([ testProxy ]);
-} else if (_inNode) {
+if (_runOnBrowser) {
+    test.add([
+        testProxy,
+        testProxyBuffer,
+    ]);
+} else if (_runOnNode) {
     test.add([ testNodeProxy ]);
 }
 
@@ -30,11 +33,13 @@ return test.run().clone();
 
 
 function testProxy(next) {
-    var href = _inWorker  ? this.href
-             : _inBrowser ? location.href : "";
+    var href = _runOnWorker  ? this.href
+             : _runOnBrowser ? location.href : "";
 
     var task = new Task(3, function(err, buffer) {
-            if ( buffer.xhr === buffer.proxy && buffer.proxy === buffer.proxy_get ) {
+            if ( !err &&
+                 buffer.xhr   === buffer.proxy &&
+                 buffer.proxy === buffer.proxy_get ) {
                 next && next.pass();
             } else {
                 next && next.miss();
@@ -48,6 +53,7 @@ function testProxy(next) {
         task.set("xhr", this.responseText);
         task.pass();
     });
+    xhr.addEventListener("error", function(error) { task.miss(); });
     xhr.open("GET", href);
     xhr.send();
 
@@ -58,6 +64,7 @@ function testProxy(next) {
         task.set("proxy", this.responseText);
         task.pass();
     });
+    proxy.on("error", function(error) { task.miss(); });
     proxy.open("GET", href);
     proxy.send();
 
@@ -68,6 +75,54 @@ function testProxy(next) {
         task.set("proxy_get", responseText);
         task.pass();
     });
+}
+
+function testProxyBuffer(next) {
+    var href = _runOnWorker  ? this.href
+             : _runOnBrowser ? location.href : "";
+
+    var task = new Task(2, function(err, buffer) {
+            var ok = false;
+
+            debugger;
+            if (!err) {
+                if (buffer.xhr.constructor.name === "ArrayBuffer") {
+                    if (buffer.proxy.constructor.name === "ArrayBuffer") {
+                        ok = true;
+                    }
+                }
+            }
+
+            if (ok) {
+                next && next.pass();
+            } else {
+                next && next.miss();
+            }
+        });
+
+    // ----------------------------------------------
+    var xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("load", function(event) {
+        task.set("xhr", this.response);
+        task.pass();
+    });
+    xhr.addEventListener("error", function(error) { task.miss(); });
+    xhr.open("GET", href);
+    xhr.responseType = "arraybuffer";
+    xhr.send();
+
+    // ----------------------------------------------
+    var proxy = new Proxy();
+
+    proxy.on("load", function(event) {
+        task.set("proxy", this.response);
+        task.pass();
+    });
+    proxy.on("error", function(error) { task.miss(); });
+    proxy.open("GET", href);
+    proxy.responseType = "arraybuffer";
+    proxy.send();
 }
 
 
@@ -90,12 +145,11 @@ function testNodeProxy(next) {
             }
         });
 
-
     // ----------------------------------------------
     var proxy = new NodeProxy();
 
     proxy.on("load", function(event) {
-        console.log(_CONSOLE_COLOR.GREEN + "\n  absolute: " + absolute + "\n" + _CONSOLE_COLOR.YELLOW + this.responseText.slice(0, 20) + _CONSOLE_COLOR.CLEAR);
+        console.log(CONSOLE_COLOR.GREEN + "\n  absolute: " + absolute + "\n" + CONSOLE_COLOR.YELLOW + this.responseText.slice(0, 20) + CONSOLE_COLOR.CLEAR);
 
         task.set("absolute", this.responseText);
         task.pass();
@@ -112,7 +166,7 @@ function testNodeProxy(next) {
     var proxy2 = new NodeProxy();
 
     proxy2.on("load", function(event) {
-        console.log(_CONSOLE_COLOR.GREEN + "\n  relative: " + relative + "\n" + _CONSOLE_COLOR.YELLOW + this.responseText.slice(0, 20) + _CONSOLE_COLOR.CLEAR);
+        console.log(CONSOLE_COLOR.GREEN + "\n  relative: " + relative + "\n" + CONSOLE_COLOR.YELLOW + this.responseText.slice(0, 20) + CONSOLE_COLOR.CLEAR);
 
         task.set("relative", this.responseText);
         task.pass();
@@ -125,7 +179,7 @@ function testNodeProxy(next) {
     var proxy3 = new NodeProxy();
 
     proxy3.on("load", function(event) {
-        console.log(_CONSOLE_COLOR.GREEN + "\n  localFile: " + localFile + "\n" + _CONSOLE_COLOR.YELLOW + this.responseText.slice(0, 20) + _CONSOLE_COLOR.CLEAR);
+        console.log(CONSOLE_COLOR.GREEN + "\n  localFile: " + localFile + "\n" + CONSOLE_COLOR.YELLOW + this.responseText.slice(0, 20) + CONSOLE_COLOR.CLEAR);
 
         task.set("localFile", this.responseText);
         task.pass();
@@ -137,7 +191,7 @@ function testNodeProxy(next) {
     var proxy4 = new NodeProxy();
 
     proxy4.on("load", function(event) {
-        console.log(_CONSOLE_COLOR.GREEN + "\n  fileScheme: " + fileScheme + "\n" + _CONSOLE_COLOR.YELLOW + this.responseText.slice(0, 20) + _CONSOLE_COLOR.CLEAR);
+        console.log(CONSOLE_COLOR.GREEN + "\n  fileScheme: " + fileScheme + "\n" + CONSOLE_COLOR.YELLOW + this.responseText.slice(0, 20) + CONSOLE_COLOR.CLEAR);
 
         task.set("fileScheme", this.responseText);
         task.pass();

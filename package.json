@@ -1,9 +1,9 @@
 {
   "name":           "uupaa.nodeproxy.js",
-  "version":        "0.0.13",
+  "version":        "0.0.14",
   "description":    "XMLHttpRequest Proxy for Node.js",
   "url":            "https://github.com/uupaa/NodeProxy.js",
-  "keywords":       ["XHR", "network", "util", "uupaa", "WebModule"],
+  "keywords":       ["XHR", "network", "util", "uupaa", "WebModule", "Unstable"],
   "repository": {
     "type":         "git",
     "url":          "https://github.com/uupaa/NodeProxy.js.git"
@@ -24,6 +24,7 @@
     "files":        ["lib/NodeProxy.js"],
     "output":       "release/NodeProxy.min.js",
     "target":       ["Node"],
+    "labels":       ["@dev"],
     "module": {
       "develop":    ["uupaa.valid.js"],
       "release":    ["uupaa.eventlistener.js", "uupaa.datatype.js", "uupaa.uri.js"]
