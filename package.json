@@ -1,9 +1,9 @@
 {
   "name":           "uupaa.nodeproxy.js",
-  "version":        "0.0.14",
+  "version":        "0.1.0",
   "description":    "XMLHttpRequest Proxy for Node.js",
   "url":            "https://github.com/uupaa/NodeProxy.js",
-  "keywords":       ["XHR", "network", "util", "uupaa", "WebModule", "Unstable"],
+  "keywords":       ["XMLHttpRequest", "XHR", "request", "network", "proxy", "util", "uupaa", "WebModule", "Unstable"],
   "repository": {
     "type":         "git",
     "url":          "https://github.com/uupaa/NodeProxy.js.git"
@@ -18,13 +18,18 @@
     "test-debug":   "NODE_ENV=production NODE_PATH=lib node --debug-brk --harmony test/index.node.js",
     "test-node":    "NODE_ENV=production NODE_PATH=lib node --harmony test/index.node.js",
     "test-browser": "open test/index.html",
+    "test-sim":     "",
+    "server":       "http-server -c-1 -p 8585 &",
+    "server-stop":  "",
+    "server-kill":  "killall -- node /usr/local/bin/http-server -p 8585 ; exit 0",
+    "hint":         "jshint lib/*.js",
     "lint":         "node node_modules/uupaa.plato.js; open lint/plato/index.html"
   },
   "x-build": {
-    "files":        ["lib/NodeProxy.js"],
+    "source":       ["lib/NodeProxy.js"],
     "output":       "release/NodeProxy.min.js",
     "target":       ["Node"],
-    "labels":       ["@dev"],
+    "label":        ["@dev"],
     "module": {
       "develop":    ["uupaa.valid.js"],
       "release":    ["uupaa.eventlistener.js", "uupaa.datatype.js", "uupaa.uri.js"]
@@ -33,10 +38,12 @@
   "dependencies": {
     "uupaa.eventlistener.js": "",
     "uupaa.datatype.js": "",
-    "uupaa.uri.js":     ""
+    "uupaa.uri.js": ""
   },
   "devDependencies": {
     "uupaa.nodemodule.js": "",
+    "uupaa.reflection.js": "",
+    "uupaa.iphonesimulator.js": "",
     "uupaa.console.js": "",
     "uupaa.valid.js":   "",
     "uupaa.help.js":    "",

@@ -1,22 +1,21 @@
-=========
-NodeProxy.js
-=========
+# NodeProxy.js [![Build Status](https://travis-ci.org/uupaa/NodeProxy.js.png)](http://travis-ci.org/uupaa/NodeProxy.js)
 
-![](https://travis-ci.org/uupaa/NodeProxy.js.png)
+[![npm](https://nodei.co/npm/uupaa.nodeproxy.js.png?downloads=true&stars=true)](https://nodei.co/npm/uupaa.nodeproxy.js/)
 
 XMLHttpRequest Proxy for Node.js
 
-# Document
+## Document
 
 - [NodeProxy.js wiki](https://github.com/uupaa/NodeProxy.js/wiki/NodeProxy)
 - [Development](https://github.com/uupaa/WebModule/wiki/Development)
 - [WebModule](https://github.com/uupaa/WebModule) ([Slide](http://uupaa.github.io/Slide/slide/WebModule/index.html))
 
 
-# How to use
+## How to use
+
+### Node.js
 
 ```js
-// for Node.js
 var NodeProxy = require("lib/NodeProxy.js");
 
 var proxy = new NodeProxy();
