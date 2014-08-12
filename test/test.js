@@ -22,17 +22,17 @@ var test = new Test("NodeProxy", {
 
 if (_runOnBrowser) {
     test.add([
-        testProxy,
-        testProxyBuffer,
+        testXHRProxy,
+        testXHRProxyBuffer,
     ]);
 } else if (_runOnNode) {
-    test.add([ testNodeProxy ]);
+    test.add([ testNodeProxy, testNodeProxyGet ]);
 }
 
 return test.run().clone();
 
 
-function testProxy(test, pass, miss) {
+function testXHRProxy(test, pass, miss) {
     var href = _runOnWorker  ? this.href
              : _runOnBrowser ? location.href : "";
 
@@ -58,7 +58,7 @@ function testProxy(test, pass, miss) {
     xhr.send();
 
     // ----------------------------------------------
-    var proxy = new Proxy();
+    var proxy = new XHRProxy();
 
     proxy.on("load", function(event) {
         task.set("proxy", this.responseText);
@@ -69,15 +69,13 @@ function testProxy(test, pass, miss) {
     proxy.send();
 
     // ----------------------------------------------
-    var proxy2 = new Proxy();
-
-    proxy2.get(href, function(error, responseText, xhr) {
+    XHRProxy.get(href, function(error, responseText, xhr) {
         task.set("proxy_get", responseText);
         task.pass();
     });
 }
 
-function testProxyBuffer(test, pass, miss) {
+function testXHRProxyBuffer(test, pass, miss) {
     var href = _runOnWorker  ? this.href
              : _runOnBrowser ? location.href : "";
 
@@ -113,7 +111,7 @@ function testProxyBuffer(test, pass, miss) {
     xhr.send();
 
     // ----------------------------------------------
-    var proxy = new Proxy();
+    var proxy = new XHRProxy();
 
     proxy.on("load", function(event) {
         task.set("proxy", this.response);
@@ -158,7 +156,7 @@ function testNodeProxy(test, pass, miss) {
     });
     proxy.on("error", function() {
         debugger;
-        console.log("Error Proxy");
+        console.log("Error XHRProxy");
         task.miss();
     });
     proxy.open("GET", absolute);
@@ -175,7 +173,7 @@ function testNodeProxy(test, pass, miss) {
     });
     proxy2.on("error", function() {
         debugger;
-        console.log("Error Proxy2");
+        console.log("Error XHRProxy2");
         task.miss();
     });
     proxy2.open("GET", relative);
@@ -193,7 +191,7 @@ function testNodeProxy(test, pass, miss) {
     });
     proxy3.on("error", function() {
         debugger;
-        console.log("Error Proxy3");
+        console.log("Error XHRProxy3");
         task.miss();
     });
     proxy3.open("GET", localFile);
@@ -210,13 +208,24 @@ function testNodeProxy(test, pass, miss) {
     });
     proxy4.on("error", function() {
         debugger;
-        console.log("Error Proxy4");
+        console.log("Error XHRProxy4");
         task.miss();
     });
     proxy4.open("GET", fileScheme);
     proxy4.send();
 }
 
+function testNodeProxyGet(test, pass, miss) {
+    var url = "http://example.com/";
+
+    NodeProxy.get(url, function(error, responseText, xhr) {
+        if ( !error && /<body>/.test(responseText) ) {
+            test.done(pass());
+        } else {
+            test.done(miss());
+        }
+    });
+}
 
 })((this || 0).self || global);
 
