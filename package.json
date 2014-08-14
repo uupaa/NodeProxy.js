@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.nodeproxy.js",
-  "version":        "0.1.1",
+  "version":        "0.1.2",
   "description":    "XMLHttpRequest proxy for Node.js",
   "url":            "https://github.com/uupaa/NodeProxy.js",
   "keywords":       ["XMLHttpRequest", "XHR", "request", "network", "proxy", "util", "uupaa", "WebModule", "Unstable"],
@@ -9,6 +9,7 @@
     "url":          "https://github.com/uupaa/NodeProxy.js.git"
   },
   "scripts": {
+    "init":         "npm update; npm run build; npm run test-page",
     "watch":        "node node_modules/uupaa.watch.js --verbose --action build",
     "build":        "node node_modules/uupaa.minify.js --verbose --strict --keep --pretty",
     "build-simple": "node node_modules/uupaa.minify.js --verbose --strict --keep --pretty --nowrap --simple",
