@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.nodeproxy.js",
-  "version":        "0.1.2",
+  "version":        "0.1.3",
   "description":    "XMLHttpRequest proxy for Node.js",
   "url":            "https://github.com/uupaa/NodeProxy.js",
   "keywords":       ["XMLHttpRequest", "XHR", "request", "network", "proxy", "util", "uupaa", "WebModule", "Unstable"],
@@ -33,13 +33,13 @@
     "label":        ["@dev"],
     "module": {
       "develop":    ["uupaa.valid.js"],
-      "release":    ["uupaa.eventlistener.js", "uupaa.datatype.js", "uupaa.uri.js"]
+      "release":    ["uupaa.wmevent.js", "uupaa.datatype.js", "uupaa.wmurl.js"]
     }
   },
   "dependencies": {
-    "uupaa.eventlistener.js": "",
+    "uupaa.wmevent.js": "",
     "uupaa.datatype.js": "",
-    "uupaa.uri.js": ""
+    "uupaa.wmurl.js": ""
   },
   "devDependencies": {
     "uupaa.nodemodule.js": "",
